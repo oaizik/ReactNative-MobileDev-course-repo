@@ -41,9 +41,9 @@ export default function App() {
           {isLoggedIn && <View style={styles.navItem}>
             <FontAwesome name="calendar-check-o" size={30} color={navIndicator === 2 ? "purple" : "black"} onPress={() => setNavIndicator(2)} />
           </View>}
-          {isLoggedIn && <View style={styles.navItem}>
+          <View style={styles.navItem}>
             <FontAwesome name="info-circle" size={30} color={navIndicator === 1 ? "purple" : "black"} onPress={() => setNavIndicator(1)} />
-          </View>}
+          </View>
           <View style={styles.navItem}>
             <FontAwesome name="home" size={30} color={navIndicator === 0 ? "purple" : "black"} onPress={() => setNavIndicator(0)} />
           </View>

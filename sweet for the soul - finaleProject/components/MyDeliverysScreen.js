@@ -36,9 +36,16 @@ function MyDeliverysScreen(props) {
   }, [])
 
   const deleteTaskClicked = async (selectedId) => {
-    // selectedId the the deliveryId for the API call
     setData(data.filter(item => item._id !== selectedId));
     // API call to update task, delete userId from delivery
+    const requestOptions = {
+      method: 'POST',
+      redirect: 'follow'
+    };
+    fetch(`https://sweet-for-the-soul-server.herokuapp.com/delivery/cancelAssign/${selectedId}`, requestOptions)
+      .then(response => response.json())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
     // do somthing bad for the user
     setPage(false);
   };
@@ -50,12 +57,12 @@ function MyDeliverysScreen(props) {
       redirect: 'follow'
     };
     fetch(`${consts.server_url}/delivery/complete/${selectedId}`, requestOptions)
-      .then(response => response.text())
+      .then(response => response.json())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
     // API call to increment user deliverys number
     fetch(`${consts.server_url}/user/incdeliveries/${user._id}`, requestOptions)
-      .then(response => response.text())
+      .then(response => response.json())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
     // do somthing nice for the user

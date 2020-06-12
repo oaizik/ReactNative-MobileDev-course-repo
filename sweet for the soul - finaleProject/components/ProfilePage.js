@@ -45,10 +45,20 @@ function ProfilePage(props) {
   const authenticateUser = async () => {
     setIsLoading(true);
     if(!form) {
-      await props.setUser(mockUser);
-      // auth new user, returning user object 
-      // if authenticate successfuly save the user object in redux -> await props.setUser(user) -> setIsLoggedIn(true);
-      // if authentication failed alert the user for wrong credentials;
+      const requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      let response = await fetch(`${consts.server_url}/user/signin/${userEmail}&${userPassword}`, requestOptions)
+        .then(response => response.json())
+        .catch(error => console.log('authentication error, ', error));
+      console.log(response)
+      if(response && response.user) {
+        await props.setUser(response.user);
+        setIsLoggedIn(true);
+      } else if (response && !response.user) {
+        alert('authentication error, please try again or contact us if this issue continue');
+      }
     } else {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
@@ -64,11 +74,11 @@ function ProfilePage(props) {
         .catch(error => console.log('authentication error, ', error));
       if(response && response.user) {
         await props.setUser(response.user);
+        setIsLoggedIn(true);
       } else {
         alert('authentication error, please try again or contact us if this issue continue');
       }
     }
-    setIsLoggedIn(true);
     setIsLoading(false);
   };
 
@@ -82,7 +92,7 @@ function ProfilePage(props) {
       }
       <Image style={styles.image} source={{uri: consts.background_image, }} />
       {isLoggedIn ? 
-        (<Trophys name={user.name} numOfDeliverys={user.numOfDeliverys} />)
+        (<Trophys name={user.name} numOfDeliverys={user.numOfDeliveries} />)
           :
         (<View style={styles.content}>
           <Text style={styles.headText}>Let's start sweetening the world</Text>
