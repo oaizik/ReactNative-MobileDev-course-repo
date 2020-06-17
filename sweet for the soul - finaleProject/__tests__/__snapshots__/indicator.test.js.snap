@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`loading indicator component tetst render loading indicator component snapshot 1`] = `
+<View
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    collapsable={true}
+    pointerEvents="box-none"
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      styles={
+        Object {
+          "marginTop": 130,
+        }
+      }
+    >
+      <ActivityIndicator
+        animating={true}
+        color="#8b0000"
+        hidesWhenStopped={true}
+        size={100}
+      />
+      <Text
+        style={
+          Object {
+            "fontSize": 30,
+            "marginTop": 40,
+            "textAlign": "center",
+          }
+        }
+      >
+         
+        indicator text...
+         
+      </Text>
+    </View>
+  </View>
+</View>
+`;
